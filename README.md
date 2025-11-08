@@ -4,8 +4,29 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Supabase auth setup
+
+This project includes simple Login and Signup pages wired to Supabase. To make them work you must provide two environment variables to Vite:
+
+- VITE_SUPABASE_URL - your Supabase project URL
+- VITE_SUPABASE_ANON_KEY - your Supabase anon/public key
+
+Create a `.env` file in the project root with the following example values (replace with your real keys):
+
+```
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGci...your_anon_key...
+```
+
+Install the new dependencies and run the dev server:
+
+```powershell
+npm install
+npm run dev
+```
+
+Then visit http://localhost:5173/login or /signup.
 
 ## React Compiler
 
