@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
 import { supabase } from '../lib/supabase'
-import './auth.css'
 
 const Signup: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -35,21 +36,55 @@ const Signup: React.FC = () => {
   }
 
   return (
-    <div className="auth-root">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h2>Create account</h2>
-        {error && <div className="auth-error">{error}</div>}
-        <label>
-          Email
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50">
+      <form
+        className="mx-auto w-full max-w-sm bg-white text-gray-900 rounded-lg shadow-lg p-8 flex flex-col gap-6"
+        onSubmit={handleSubmit}
+        style={{ maxWidth: 480, rowGap: '1.5rem' }}
+      >
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-md shadow-md" />
+          <div>
+            <h2 className="text-2xl font-semibold">Create account</h2>
+            <p className="text-sm text-gray-500">Start building your profile</p>
+          </div>
+        </div>
+
+        {error && <div className="bg-red-50 text-red-700 p-2 rounded">{error}</div>}
+
+        <label className="flex flex-col text-sm">
+          <span className="text-gray-600">Email</span>
+          <Input
+            className="mt-1"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+            aria-label="Email"
+          />
         </label>
-        <label>
-          Password
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+
+        <label className="flex flex-col text-sm">
+          <span className="text-gray-600">Password</span>
+          <Input
+            className="mt-1"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+            aria-label="Password"
+          />
         </label>
-        <button type="submit" disabled={loading}>{loading ? 'Creating...' : 'Create account'}</button>
-        <p>
-          Already have an account? <Link to="/login">Log in</Link>
+
+        <Button className="w-full" type="submit" disabled={loading} size="lg">
+          {loading ? 'Creating...' : 'Create account'}
+        </Button>
+
+        <p className="text-center text-sm">
+          Already have an account?{' '}
+          <Button asChild size="sm">
+            <Link to="/login">Log in</Link>
+          </Button>
         </p>
       </form>
     </div>
