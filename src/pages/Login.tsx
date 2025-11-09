@@ -17,10 +17,9 @@ const Login: React.FC = () => {
     setError(null)
     try {
       const res = await supabase.auth.signInWithPassword({ email, password })
-      // log full response to help debugging in dev tools
-      // (don't keep verbose logging in production)
-      // eslint-disable-next-line no-console
-      console.debug('supabase signIn response', res)
+  // log full response to help debugging in dev tools
+  // (don't keep verbose logging in production)
+  console.debug('supabase signIn response', res)
       if (res.error) {
         // For common cases (invalid credentials) give a small hint
         const msg = res.error.message || 'Invalid login credentials'
@@ -29,10 +28,9 @@ const Login: React.FC = () => {
         // Signed in — navigate to landing UI
         navigate('/landing')
       }
-    } catch (err: any) {
-      // eslint-disable-next-line no-console
+    } catch (err: unknown) {
       console.error('signIn error', err)
-      setError(err?.message ?? 'An unexpected error occurred')
+      setError((err as Error)?.message ?? 'An unexpected error occurred')
     } finally {
       setLoading(false)
     }

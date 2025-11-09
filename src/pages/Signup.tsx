@@ -17,8 +17,7 @@ const Signup: React.FC = () => {
     setError(null)
     try {
       const res = await supabase.auth.signUp({ email, password })
-      // eslint-disable-next-line no-console
-      console.debug('supabase signUp response', res)
+  console.debug('supabase signUp response', res)
       if (res.error) {
         setError(res.error.message)
       } else {
@@ -26,10 +25,9 @@ const Signup: React.FC = () => {
         // Redirect to landing by default
         navigate('/landing')
       }
-    } catch (err: any) {
-      // eslint-disable-next-line no-console
+    } catch (err: unknown) {
       console.error('signUp error', err)
-      setError(err?.message ?? 'An unexpected error occurred')
+      setError((err as Error)?.message ?? 'An unexpected error occurred')
     } finally {
       setLoading(false)
     }
